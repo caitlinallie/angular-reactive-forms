@@ -14,7 +14,13 @@ export class AppComponent implements OnInit {
     constructor(private formBuilder: FormBuilder) {
     }
 
-    ngOnInit(): any {
+    ngOnInit(): void {
+        this.buildSignupForm();
+        this.buildAddressForm();
+        this.buildContactForm();
+    }
+
+    buildSignupForm(): void {
         this.signupForm = this.formBuilder.group({
             email: ['', [
                 Validators.required,
@@ -33,6 +39,16 @@ export class AppComponent implements OnInit {
             ]]
         });
 
+        this.signupForm.valueChanges.subscribe((value) => {
+            console.log('Value of signup form has changed! ', value);
+        });
+
+        this.signupForm.statusChanges.subscribe((value) => {
+            console.log('Status of signup form has changed! ', value);
+        });
+    }
+
+    buildAddressForm(): void {
         this.addressForm = this.formBuilder.group({
             homeAddress: this.formBuilder.group({
                 street: '',
@@ -45,7 +61,9 @@ export class AppComponent implements OnInit {
                 state: ''
             })
         });
+    }
 
+    buildContactForm(): void {
         const contact = this.formBuilder.group({
             firstName: [],
             lastName: [],
@@ -64,6 +82,7 @@ export class AppComponent implements OnInit {
     resetForm(form: FormGroup): void {
         form.reset();
     }
+
     get contactForms(): FormArray {
         return this.contactForm.get('contacts') as FormArray;
     }
