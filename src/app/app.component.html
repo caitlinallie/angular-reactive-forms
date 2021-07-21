@@ -10,7 +10,7 @@
 <main role="main">
 
     <div class="form-area">
-        <h1>Static Form with Validation</h1>
+        <h1>Form with Validation</h1>
 
         <div class="flex-container">
             <div>
@@ -35,9 +35,9 @@
             <div>
                 <h2>Form States</h2>
                 <ul>
-                    <li>Valid: {{signupForm.valid}}</li>
-                    <li>Untouched: {{signupForm.untouched}}</li>
-                    <li>Pristine: {{signupForm.pristine}}</li>
+                    <li>Valid: <span [ngClass]="'value-'+signupForm.valid">{{signupForm.valid}}</span></li>
+                    <li>Untouched: <span [ngClass]="'value-'+signupForm.untouched">{{signupForm.untouched}}</span></li>
+                    <li>Pristine: <span [ngClass]="'value-'+signupForm.pristine">{{signupForm.pristine}}</span></li>
                 </ul>
             </div>
         </div>
@@ -83,9 +83,9 @@
             <div>
                 <h2>Form States</h2>
                 <ul>
-                    <li>Valid: {{addressForm.valid}}</li>
-                    <li>Untouched: {{addressForm.untouched}}</li>
-                    <li>Pristine: {{addressForm.pristine}}</li>
+                    <li>Valid: <span [ngClass]="'value-'+addressForm.valid">{{addressForm.valid}}</span></li>
+                    <li>Untouched: <span [ngClass]="'value-'+addressForm.untouched">{{addressForm.untouched}}</span></li>
+                    <li>Pristine: <span [ngClass]="'value-'+addressForm.pristine">{{addressForm.pristine}}</span></li>
                 </ul>
             </div>
         </div>
@@ -97,30 +97,29 @@
 
         <div class="flex-container">
             <div>
-                <form [formGroup]="phoneForm" (ngSubmit)="onSubmit(phoneForm)">
-                    <div formArrayName="phones">
-                        <div *ngFor="let phone of phoneForms.controls; let i=index" [formGroupName]="i"
+                <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm)">
+                    <div formArrayName="contacts">
+                        <div *ngFor="let contact of contactForms.controls; let i=index" [formGroupName]="i"
                              class="form-group">
-                            <input type="text" formControlName="area">
-                            <input type="text" formControlName="prefix">
-                            <input type="text" formControlName="line">
-
-                            <button type="button" (click)="removePhone(i)" *ngIf="i">Delete</button>
+                            <input type="text" placeholder="First Name" formControlName="firstName">
+                            <input type="text" placeholder="Last Name" formControlName="lastName">
+                            <input type="text" placeholder="Phone Number" formControlName="phoneNumber">
+                            <button type="button" (click)="removeContact(i)" *ngIf="i">Delete</button>
                         </div>
                     </div>
 
-                    <button type="button" (click)="addPhone()">Add Phone</button>
-                    <button type="submit" [disabled]="phoneForm.invalid">Submit</button>
-                    <button type="button" (click)="resetForm(phoneForm)">Reset Form</button>
+                    <button type="button" (click)="addContact()">Add Contact</button>
+                    <button type="submit" [disabled]="contactForm.invalid">Submit</button>
+                    <button type="button" (click)="resetForm(contactForm)">Reset Form</button>
                 </form>
             </div>
 
             <div>
                 <h2>Form States</h2>
                 <ul>
-                    <li>Valid: {{addressForm.valid}}</li>
-                    <li>Untouched: {{addressForm.untouched}}</li>
-                    <li>Pristine: {{addressForm.pristine}}</li>
+                    <li>Valid: <span [ngClass]="'value-'+contactForm.valid">{{contactForm.valid}}</span></li>
+                    <li>Untouched: <span [ngClass]="'value-'+contactForm.untouched">{{contactForm.untouched}}</span></li>
+                    <li>Pristine: <span [ngClass]="'value-'+contactForm.pristine">{{contactForm.pristine}}</span></li>
                 </ul>
             </div>
         </div>

@@ -9,7 +9,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AppComponent implements OnInit {
     signupForm!: FormGroup;
     addressForm!: FormGroup;
-    phoneForm!: FormGroup;
+    contactForm!: FormGroup;
 
     constructor(private formBuilder: FormBuilder) {
     }
@@ -46,14 +46,14 @@ export class AppComponent implements OnInit {
             })
         });
 
-        const phone = this.formBuilder.group({
-            area: [],
-            prefix: [],
-            line: []
+        const contact = this.formBuilder.group({
+            firstName: [],
+            lastName: [],
+            phoneNumber: []
         });
 
-        this.phoneForm = this.formBuilder.group({
-            phones: this.formBuilder.array([phone])
+        this.contactForm = this.formBuilder.group({
+            contacts: this.formBuilder.array([contact])
         });
     }
 
@@ -64,20 +64,20 @@ export class AppComponent implements OnInit {
     resetForm(form: FormGroup): void {
         form.reset();
     }
-    get phoneForms(): FormArray {
-        return this.phoneForm.get('phones') as FormArray;
+    get contactForms(): FormArray {
+        return this.contactForm.get('contacts') as FormArray;
     }
 
-    addPhone(): void {
-        const phone = this.formBuilder.group({
-            area: [],
-            prefix: [],
-            line: []
+    addContact(): void {
+        const contact = this.formBuilder.group({
+            firstName: [],
+            lastName: [],
+            phoneNumber: []
         });
-        this.phoneForms.push(phone);
+        this.contactForms.push(contact);
     }
 
-    removePhone(i: number): void {
-        this.phoneForms.removeAt(i);
+    removeContact(i: number): void {
+        this.contactForms.removeAt(i);
     }
 }
